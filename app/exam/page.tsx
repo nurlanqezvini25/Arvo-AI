@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  Suspense,
   useEffect,
   useMemo,
   useState,
@@ -252,7 +253,7 @@ const translations = {
   },
 };
 
-export default function ExamPage() {
+function ExamPageContent() {
   const searchParams = useSearchParams();
 
   /*
@@ -1422,5 +1423,19 @@ function SkillResultCard({
         />
       </div>
     </div>
+  );
+}
+
+export default function ExamPage() {
+  return (
+    <Suspense
+      fallback={
+        <main className="flex min-h-screen items-center justify-center bg-[#F8FAFC]">
+          <div className="h-12 w-12 animate-spin rounded-full border-4 border-slate-200 border-t-blue-600" />
+        </main>
+      }
+    >
+      <ExamPageContent />
+    </Suspense>
   );
 }
